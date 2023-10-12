@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 
-const api_key = "";
+const api_key = "018620b581188ba835703b9729ebb515";
 
-export default function Home() {
+export default function Home(flagUrl) {
 
   const [data, setData] = useState({});
   const [error, setError] = useState("");
@@ -58,12 +58,17 @@ export default function Home() {
     const description = data.weather[0].description;
     const fixedDescription = description.charAt(0).toUpperCase() + description.slice(1);
     const owIcons = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+    const flagIcon = data.sys.country;
+    const fixedFlagIcon ="/flags/"+flagIcon.toLowerCase()+".png";
+
+    console.log(fixedFlagIcon);
 
     console.log(data);
 
     content = (
       <div className='container'>
         <img src={owIcons} alt="current wheather"/>
+        <img src={fixedFlagIcon} width={20} height={15} alt="country flag" />
         <p className="lead mt-3">{fixedDescription}</p>
         <h1 className="display-4">{tempToC.toFixed(1)}&deg;C</h1>
         <div className="row justify-content-between mt-4">
