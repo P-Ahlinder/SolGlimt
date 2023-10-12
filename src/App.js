@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-const api_key = "018620b581188ba835703b9729ebb515";
+const api_key = "";
 
 export default function Home(flagUrl) {
 
