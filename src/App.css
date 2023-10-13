@@ -94,4 +94,23 @@ input::placeholder {
   animation-duration: 17000ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+}
+
+@media screen and (max-width: 450px) {
+  .sun-container img {
+    width: 100%;
+    height: auto;
+  }
+  input {
+    width: 200px;
+  }
+  .flag-container {
+    margin-top: 5px;
+    margin-left: 0px;
+    margin-right: 13px;
+  }
+  .flag-container img {
+    width: 50px;
+    height: 40px;
+  }
 }/*# sourceMappingURL=App.css.map */

@@ -29,7 +29,7 @@ export default function Home() {
     }
   }
 
-  console.log(process.env)
+
 
   let content;
   if(Object.keys(data).length === 0 && error === ''){
@@ -59,7 +59,7 @@ export default function Home() {
     const flagIcon = data.sys.country;
     const fixedFlagIcon ="/flags/"+flagIcon.toLowerCase()+".png";
 
-    console.log(data);
+   
 
     content = (
       <div className='container'>
@@ -82,13 +82,13 @@ export default function Home() {
         </div>
       </div>
       <div className="container mt-3" id="hi-lo">
-        <div className="row justify-content-center align-items-center gx-4">
-          <div className="col-6 pt-3 align-self-center">
-          <p className="lead">Högsta <img src="/icons/down.png" width={20} height={20} alt="down" id="arrow" /></p>
+        <div className="row justify-content-center gx-5">
+          <div className="col-5 pt-3">
+          <p className="lead">Högsta <img src="/icons/down.png" width={20} height={20} alt="down" className="down" id="arrow" /></p>
           <p className="lead">{hiTempToC.toFixed(1)}&deg;C</p>
           </div>
-          <div className="col-6 pt-3 align-self-center">
-          <p className="lead">Lägsta <img src="/icons/down.png" width={20} height={20} alt="down" /></p>
+          <div className="col-5 pt-3">
+          <p className="lead">Lägsta <img src="/icons/down.png" width={20} height={20} alt="down" className="down"  /></p>
           <p className="lead">{loTempToC.toFixed(1)}&deg;C</p>
           </div>
         </div>
