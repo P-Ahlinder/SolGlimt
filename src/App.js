@@ -1,15 +1,13 @@
 import { useState } from "react";
 
 
-const api_key = "018620b581188ba835703b9729ebb515git";
-
-export default function Home(flagUrl) {
+export default function Home() {
 
   const [data, setData] = useState({});
   const [error, setError] = useState("");
   const [location, setLocation] = useState("");
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${api_key}&lang=sv`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_KEY}&lang=sv`;
   
   const Search = async (e) => {
     try{
@@ -31,7 +29,7 @@ export default function Home(flagUrl) {
     }
   }
 
-  
+  console.log(process.env)
 
   let content;
   if(Object.keys(data).length === 0 && error === ''){
@@ -61,15 +59,17 @@ export default function Home(flagUrl) {
     const flagIcon = data.sys.country;
     const fixedFlagIcon ="/flags/"+flagIcon.toLowerCase()+".png";
 
-    console.log(fixedFlagIcon);
-
     console.log(data);
 
     content = (
       <div className='container'>
-        <img src={owIcons} alt="current wheather"/>
-        <img src={fixedFlagIcon} width={20} height={15} alt="country flag" />
-        <p className="lead mt-3">{fixedDescription}</p>
+        <div className="flag-container text-end">
+          <img src={fixedFlagIcon} width={100} height={70} alt="Country flag" />
+        </div>
+        <div>
+          <img src={owIcons} alt="current wheather"/>
+        </div>
+        <p className="lead">{fixedDescription}</p>
         <h1 className="display-4">{tempToC.toFixed(1)}&deg;C</h1>
         <div className="row justify-content-between mt-4">
           <div className="col-6 pt-2">
@@ -94,14 +94,13 @@ export default function Home(flagUrl) {
         </div>
       </div>
     </div>
-      
     )
   }
 
   return (
     <main>
       <div className="container text-center">
-        <input autoComplete="off" className="display-4" id="location" placeholder="Ange en plats" value={location} onChange={(e) => setLocation(e.target.value)} onKeyDown={Search}/>
+        <input autoComplete="off" className="display-4" id="location" placeholder="Ange en plats:" value={location} onChange={(e) => setLocation(e.target.value)} onKeyDown={Search}/>
         {content}
       </div>
     </main>
