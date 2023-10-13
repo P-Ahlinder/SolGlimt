@@ -67,7 +67,7 @@ export default function Home() {
           <img src={fixedFlagIcon} width={100} height={70} alt="Country flag" />
         </div>
         <div>
-          <img src={owIcons} alt="current wheather"/>
+          <img src={owIcons} width={120} height={120} alt="current wheather" className="currentwheatericon"/>
         </div>
         <p className="lead">{fixedDescription}</p>
         <h1 className="display-4">{tempToC.toFixed(1)}&deg;C</h1>
