@@ -8,11 +8,10 @@ export default function Home() {
   const [data, setData] = useState({});
   const [error, setError] = useState("");
   const [location, setLocation] = useState("");
-  const [forecast, setForecast] = useState(null);
 
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_KEY}&lang=sv`;
-  const forecasturl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${process.env.REACT_APP_KEY}&lang=sv`; 
+ 
 
   const Search = async () => {
     try{
@@ -33,17 +32,6 @@ export default function Home() {
     }
   }
 
-  const handleClick = async () => {
-    try {
-        const response = await fetch(forecasturl);
-
-        const forecast = await response.json();
-        setForecast(forecast);
-        console.log(forecast);
-    } catch (err) {
-        console.log(error);
-    }
-}
 
   
   let flagContent;
