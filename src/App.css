@@ -4,13 +4,12 @@
   box-sizing: border-box;
 }
 
-#hi-lo {
-  background-color: rgba(255, 255, 255, 0.158);
-  border-radius: 5px;
-}
-
 #arrow {
   rotate: 180deg;
+}
+
+.lead.hi-lo {
+  font-size: small;
 }
 
 #bs-form {
@@ -19,6 +18,31 @@
   padding-inline-start: 5px;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
+}
+
+#search-button {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.accordion-item {
+  list-style: none;
+  transition: ease 0.4s;
+}
+
+.accordion-toggle {
+  transition: ease 0.4s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.356);
+  padding: 1em;
+}
+
+.accordion-content {
+  background-color: rgba(255, 255, 255, 0.356);
+  padding: 1em;
 }
 
 body {
@@ -32,10 +56,15 @@ body {
   min-height: 100vh;
 }
 
+.flag-container {
+  position: absolute;
+  top: 48px;
+  right: 12px;
+  overflow: hidden;
+}
 .flag-container img {
-  box-shadow: 5px 5px 11px rgba(0, 0, 0, 0.466);
-  border-radius: 3px;
-  margin: 20px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 @keyframes gradient {
@@ -94,15 +123,6 @@ h1 {
   .sun-container img {
     width: 60%;
     height: auto;
-  }
-  .flag-container {
-    margin-top: 5px;
-    margin-left: 0px;
-    margin-right: 14px;
-  }
-  .flag-container img {
-    width: 50px;
-    height: 40px;
   }
   .currentwheatericon {
     width: 85px;
