@@ -1,9 +1,23 @@
 
+  @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&family=Titillium+Web:wght@200&display=swap');
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
+
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color:rgba(255, 255, 255, 0.356);
+    text-align: center;
+    p{
+        margin-top: 10px;
+    }
+  }
 
 .lead.hi-lo{
     font-size: medium;
@@ -19,6 +33,16 @@
 #search-button{
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    font-family: 'Tilt Neon', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 700;  
+
+}
+::placeholder{
+    font-family: 'Tilt Neon', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 700;  
+
 }
 
 body{
@@ -57,7 +81,11 @@ body{
 p{
     margin: 0;
     padding: 0;
+    font-family: 'Tilt Neon', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 700;
 }
+
 
 
 @keyframes spin {
@@ -69,6 +97,8 @@ p{
     }
 }
 .sun-container{
+    font-family: 'Tilt Neon', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
     img{
         animation-name: spin;
         animation-duration: 17000ms;
@@ -102,7 +132,7 @@ p{
         margin-top: 2rem;
     }
     #main-container{
-        margin-top: 8rem;
+        margin-top: 4rem;
     }
     .sun-container{
         img{

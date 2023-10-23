@@ -13,27 +13,23 @@ export default function Home() {
   const url =`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_KEY}&lang=sv`;
   const forecasturl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${process.env.REACT_APP_KEY}&lang=sv`; 
 
+
   const Search = async () => {
-
-    axios.get(url)
-    .then(response1 => {
-
-      setCurrent(response1.data);
-      return axios.get(forecasturl);
-    })
-    .then(response2 => {
-
-      setForecast(response2.data);
-      setLocation("");
-      setError("");
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      setError("asd")
-    });
-  }
-
-
+      try {
+        const [response1, response2] = await Promise.all([
+          axios.get(url),
+          axios.get(forecasturl),
+        ]);
+    
+        setCurrent(response1.data);
+        setForecast(response2.data);
+        setLocation("");
+        setError("");
+      } catch (error) {
+        
+        setError("Något gick fel.");
+      }
+  };
   
   let flagContent;
   let content;
@@ -54,7 +50,7 @@ export default function Home() {
     );
   } else {
 
-    //CURRENT WEATHER current
+
     const kelvin = -273.17;
     const tempToC = current.main.temp + kelvin;
     const hiTempToC = current.main.temp_max + kelvin;
@@ -74,6 +70,7 @@ export default function Home() {
     content = (
       <>
         <div className='container text-center' id="content-container">
+        <p className="lead pt-2">{current.name}</p>
           <div className="row">
             <div className="current-weather">
               <img src={owIcons} width={120} height={120} alt="current wheather" className="currentwheatericon"/>
@@ -99,19 +96,17 @@ export default function Home() {
               <p className="">{current.main.humidity} %</p>
           </div>
         </div>
-        { forecast && <Forecast data={forecast}/>  }
+        { forecast && <Forecast data={forecast}/>  } 
       </div>
-      
-        
-      
     </>
     )
   }
   return (
+    <>
     <div className="container-fluid" id="main-container">
       <div className="container py-3 text-center">
         <div className="input-group align-items-center">
-          <input type="search" autoComplete="off" className="form-control shadow-none" id="bs-form" placeholder="Ange en plats" aria-label="Search"  value={location} onChange={(e) => setLocation(e.target.value)} />
+          <input type="search" autoComplete="off" className="form-control shadow-none" id="bs-form" placeholder="Ange en plats" aria-label="Search" value={location} onChange={(e) => setLocation(e.target.value)} />
           <button type="button" id="search-button" className="btn btn-outline-warning text-dark" onClick={Search}>Sök</button>
           {flagContent}
         </div>
@@ -120,6 +115,10 @@ export default function Home() {
         </div>
       </div>
     </div>
+    <div className="footer">
+    <p>SolGlimt&copy; - Per Ahlinder</p>
+    </div>
+    </>
   )
 }
 

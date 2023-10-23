@@ -1,5 +1,6 @@
 import { Sidebar, Menu, SubMenu } from 'react-pro-sidebar';
 
+
 export default function Forecast({ data }) {
 
   return (
