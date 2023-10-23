@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import Forecast from "./Components/Forecast";
 
 export default function Home() {
@@ -6,37 +7,37 @@ export default function Home() {
   const [current, setCurrent] = useState({});
   const [error, setError] = useState("");
   const [location, setLocation] = useState("");
-  const [forecast, setForecast] = useState(null);
+  const [forecast, setForecast] = useState({});
 
 
-  const url = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_KEY}&lang=sv`);
-  const forecasturl = fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${process.env.REACT_APP_KEY}&lang=sv`); 
+  const url =`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_KEY}&lang=sv`;
+  const forecasturl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${process.env.REACT_APP_KEY}&lang=sv`; 
 
   const Search = async () => {
 
-    try{
-    Promise.all([url, forecasturl])
-    .then(async (response) => {
-      const currentResponse  = await response[0].json();
-      const forecastResponse = await response[1].json();
+    axios.get(url)
+    .then(response1 => {
 
-      setCurrent(currentResponse);
-      setForecast(forecastResponse);
-      setError("");
-      console.log(current, forecast)
+      setCurrent(response1.data);
+      return axios.get(forecasturl);
     })
- 
-    }catch{
-      setError("Fail")
-      console.log(error);
-    }
+    .then(response2 => {
+
+      setForecast(response2.data);
+      setLocation("");
+      setError("");
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      setError("asd")
+    });
   }
 
 
   
   let flagContent;
   let content;
-  if(Object.keys(current, forecast).length === 0 && error === ''){
+  if(Object.keys(current).length === 0 && error === ''){
     content = (
       <>
        <h1 className="display-5 mt-3">Välkommen till SolGlimt</h1>
@@ -45,7 +46,7 @@ export default function Home() {
        </div>
       </>
     );
-  } else if(error !== "") {
+  } else if(error !== '') {
     content = (
       <div className="mt-4">
         <p>Kunde inte hitta din stad.<br />Är du säker på att du bor på planeten jorden?😉</p>
@@ -98,7 +99,7 @@ export default function Home() {
               <p className="">{current.main.humidity} %</p>
           </div>
         </div>
-        <Forecast data={forecast}/>
+        { forecast && <Forecast data={forecast}/>  }
       </div>
       
         
@@ -106,7 +107,6 @@ export default function Home() {
     </>
     )
   }
-
   return (
     <div className="container-fluid" id="main-container">
       <div className="container py-3 text-center">
